@@ -2,11 +2,15 @@ FROM alpine:3.8
 
 # Install required apckages.
 RUN apk add --no-cache \
+        curl \
         php7 \
         php7-ctype \
+        php7-curl \
         php7-dom \
         php7-iconv \
         php7-json \
+        php7-mbstring \
+        php7-openssl \
         php7-simplexml \
         php7-tokenizer \
         php7-xmlwriter \
@@ -14,23 +18,24 @@ RUN apk add --no-cache \
 
 # Install build only packages.
 RUN apk add --no-cache -t .build-deps \
-        curl \
-        php7-openssl \
         php7-phar
 
 RUN curl -Lo /usr/local/bin/composer https://getcomposer.org/composer.phar
 RUN chmod +x /usr/local/bin/composer
 
-# Install composer PHPCS requirements.
+# Install PHPCS requirements.
 RUN composer global require 'squizlabs/php_codesniffer=3.3.0'
 RUN composer global require 'escapestudios/symfony2-coding-standard=3.4.1'
 RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/escapestudios/symfony2-coding-standard/Symfony
 
-# Install composer PHPMD requirements.
+# Install PHPMD requirements.
 RUN composer global require 'phpmd/phpmd=2.6.0'
 
-# Install composer PHPCPD requirements.
+# Install PHPCPD requirements.
 RUN composer global require 'sebastian/phpcpd=4.1.0'
+
+# Install Sensiolabs security checker requirements.
+RUN composer global require 'sensiolabs/security-checker=5.0.1'
 
 # Clean-up
 RUN rm /usr/local/bin/composer \
