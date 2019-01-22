@@ -18,15 +18,22 @@ RUN apk add --no-cache \
 
 # Install build only packages.
 RUN apk add --no-cache -t .build-deps \
-        php7-phar
+        php7-phar \
+        git
 
 RUN curl -Lo /usr/local/bin/composer https://getcomposer.org/composer.phar
 RUN chmod +x /usr/local/bin/composer
 
 # Install PHPCS requirements.
 RUN composer global require 'squizlabs/php_codesniffer=3.3.0'
+
+# Install Symfony PHPCS standard.
 RUN composer global require 'escapestudios/symfony2-coding-standard=3.4.1'
 RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/escapestudios/symfony2-coding-standard/Symfony
+
+# Install Drupal PHPCS standard.
+RUN composer global require 'drupal/coder=8.3.1'
+RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/drupal/coder/coder_sniffer
 
 # Install PHPMD requirements.
 RUN composer global require 'phpmd/phpmd=2.6.0'
