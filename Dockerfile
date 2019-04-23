@@ -25,24 +25,24 @@ RUN curl -Lo /usr/local/bin/composer https://getcomposer.org/composer.phar
 RUN chmod +x /usr/local/bin/composer
 
 # Install PHPCS requirements.
-RUN composer global require 'squizlabs/php_codesniffer=3.3.0'
+RUN composer global require 'squizlabs/php_codesniffer ~3.3'
 
 # Install Symfony PHPCS standard.
-RUN composer global require 'escapestudios/symfony2-coding-standard=3.4.1'
+RUN composer global require 'escapestudios/symfony2-coding-standard ~3.4'
 RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/escapestudios/symfony2-coding-standard/Symfony
 
 # Install Drupal PHPCS standard.
-RUN composer global require 'drupal/coder=8.3.1'
+RUN composer global require 'drupal/coder ~8.3'
 RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/drupal/coder/coder_sniffer
 
 # Install PHPMD requirements.
-RUN composer global require 'phpmd/phpmd=2.6.0'
+RUN composer global require 'phpmd/phpmd ~2.6'
 
 # Install PHPCPD requirements.
-RUN composer global require 'sebastian/phpcpd=4.1.0'
+RUN composer global require 'sebastian/phpcpd ~4.1'
 
 # Install Sensiolabs security checker requirements.
-RUN composer global require 'sensiolabs/security-checker=5.0.1'
+RUN composer global require 'sensiolabs/security-checker ~5.0'
 
 # Clean-up
 RUN rm /usr/local/bin/composer \
