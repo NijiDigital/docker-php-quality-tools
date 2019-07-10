@@ -17,6 +17,11 @@ This image contains some tools to checks the PHP code quality
   * Zend
   * Symfony (from https://github.com/djoos/Symfony-coding-standard)
 
+* `phpstan`: PHP Static Analysis Tool (https://github.com/phpstan/phpstan)
+  To check if php code respect a predefined coding standard.
+  * Symfony Framework
+  * Drupal
+
 * `phpmd`: PHP Mess Detector (https://phpmd.org/)
   To check the php code complexity.
   
@@ -36,6 +41,14 @@ This image contains some tools to checks the PHP code quality
 `$ docker run --rm -v $PWD:/code:ro niji/php-quality-tools phpcs --help`
 
 Visit https://github.com/squizlabs/PHP_CodeSniffer for all `phpcs` usage.
+
+### phpcs
+
+`$ docker run --rm -v $PWD:/code:ro niji/php-quality-tools phpstan [options]`
+
+`$ docker run --rm -v $PWD:/code:ro niji/php-quality-tools phpstan --help`
+
+Visit https://github.com/phpstan/phpstan for all `phpstan` usage.
 
 ### phpmd
 

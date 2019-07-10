@@ -35,6 +35,13 @@ RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.compose
 RUN composer global require 'drupal/coder ~8.3'
 RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/drupal/coder/coder_sniffer
 
+# Install PHPStan requirements
+RUN composer global require 'phpstan/phpstan ~0.11'
+
+# Install PHPStan additonnal analysis
+RUN composer global require 'phpstan/phpstan-symfony ~0.11'
+RUN composer global require 'mglaman/phpstan-drupal ~0.11'
+
 # Install PHPMD requirements.
 RUN composer global require 'phpmd/phpmd ~2.6'
 
