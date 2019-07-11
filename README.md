@@ -42,7 +42,7 @@ This image contains some tools to checks the PHP code quality
 
 Visit https://github.com/squizlabs/PHP_CodeSniffer for all `phpcs` usage.
 
-### phpcs
+### phpstan
 
 `$ docker run --rm -v $PWD:/code:ro niji/php-quality-tools phpstan [options]`
 
