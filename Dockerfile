@@ -1,7 +1,8 @@
 FROM alpine:3.8
 
-# Install required apckages.
+# Install required packages.
 RUN apk add --no-cache \
+        bash \
         curl \
         php7 \
         php7-ctype \
