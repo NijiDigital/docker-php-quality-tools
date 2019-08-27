@@ -45,16 +45,19 @@ RUN apk add --no-cache -t .build-deps \
 RUN curl -Lo /usr/local/bin/composer https://getcomposer.org/composer.phar
 RUN chmod +x /usr/local/bin/composer
 
+RUN mkdir /usr/local/composer
+ENV COMPOSER_HOME="/usr/local/composer" 
+
 # Install PHPCS requirements.
 RUN composer global require 'squizlabs/php_codesniffer ~3.3'
 
 # Install Symfony PHPCS standard.
 RUN composer global require 'escapestudios/symfony2-coding-standard ~3.4'
-RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/escapestudios/symfony2-coding-standard/Symfony
+RUN $COMPOSER_HOME/vendor/bin/phpcs --config-set installed_paths $COMPOSER_HOME/vendor/escapestudios/symfony2-coding-standard/Symfony
 
 # Install Drupal PHPCS standard.
 RUN composer global require 'drupal/coder ~8.3'
-RUN /root/.composer/vendor/bin/phpcs --config-set installed_paths /root/.composer/vendor/drupal/coder/coder_sniffer
+RUN $COMPOSER_HOME/vendor/bin/phpcs --config-set installed_paths $COMPOSER_HOME/vendor/drupal/coder/coder_sniffer
 
 # Install PHPStan requirements
 RUN composer global require 'phpstan/phpstan ~0.11'
@@ -80,7 +83,7 @@ RUN rm /usr/local/bin/composer \
 RUN mkdir -p /code
 
 # Register composer vendor bin directory.
-ENV PATH=$PATH:/root/.composer/vendor/bin/
+ENV PATH=$PATH:$COMPOSER_HOME/vendor/bin/
 
 WORKDIR /code
 VOLUME /code
