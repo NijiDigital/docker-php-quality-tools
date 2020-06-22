@@ -64,6 +64,7 @@ RUN composer global require 'phpstan/phpstan ~0.11'
 
 # Install PHPStan additonnal analysis
 RUN composer global require 'phpstan/phpstan-symfony ~0.11'
+RUN composer global require 'phpstan/phpstan-doctrine ~0.11'
 RUN composer global require 'mglaman/phpstan-drupal ~0.11'
 
 # Install PHPMD requirements.
